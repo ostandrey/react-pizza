@@ -4,6 +4,8 @@ import Header from './components/Header';
 import Sort from './components/Sort';
 import './scss/app.scss';
 
+import pizzas from './pizza.json';
+
 function App() {
   return (
     <div className="wrapper">
@@ -16,7 +18,9 @@ function App() {
           </div>
           <h2 className="content__title">All pizza</h2>
           <div className="content__items">
-            <Card />
+            {pizzas.map((pizza) => (
+              <Card {...pizza} />
+            ))}
           </div>
         </div>
       </div>
