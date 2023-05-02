@@ -19,7 +19,7 @@ function App() {
           <h2 className="content__title">All pizza</h2>
           <div className="content__items">
             {pizzas.map((pizza) => (
-              <Card {...pizza} />
+              <Card key={pizza.id} {...pizza} />
             ))}
           </div>
         </div>

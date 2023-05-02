@@ -1,9 +1,19 @@
 import React from 'react';
 
+const sortList = ['popularity', 'price', 'alphabet'];
+
 function Sort() {
+  const [isClose, setIsClose] = React.useState(false);
+  const [selectedSort, setSelectedSort] = React.useState(0);
+
+  const onCloseSortList = (index) => {
+    setSelectedSort(index);
+    setIsClose(false);
+  };
+
   return (
     <div className="sort">
-      <div className="sort__label">
+      <div className="sort__label" onClick={() => setIsClose(!isClose)}>
         <svg
           width="10"
           height="6"
@@ -16,15 +26,22 @@ function Sort() {
           />
         </svg>
         <b>Sort by:</b>
-        <span>popularity</span>
+        <span>{sortList[selectedSort]}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">popularity</li>
-          <li>price</li>
-          <li>alphabet</li>
-        </ul>
-      </div>
+      {isClose && (
+        <div className="sort__popup">
+          <ul>
+            {sortList.map((sortItem, index) => (
+              <li
+                key={sortItem}
+                onClick={() => onCloseSortList(index)}
+                className={selectedSort === index ? 'active' : ''}>
+                {sortItem}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
